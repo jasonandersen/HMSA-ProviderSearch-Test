@@ -1,55 +1,58 @@
-﻿using System;
+﻿using DotCom.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System.Collections.Generic;
 
 namespace DotCom
 {
     [TestFixture]
-    public class ProviderSearchTest
+    class ProviderSearchTest
     {
 
         private IWebDriver driver;
 
-        [TearDown]
-        public void shutdownBrowser()
+        [SetUp]
+        public void SetupBrowser()
         {
-            //close browser
-            //System.Threading.Thread.Sleep(1000);
+            driver = new ChromeDriver();
+        }
+
+        [TearDown]
+        public void TearDownBrowser()
+        {
             driver.Close();
         }
 
         [Test]
-        public void TestProviderSearch()
+        public void TestProviderSearchFromHomePage()
         {
-            //boot up browser
-            driver = new ChromeDriver();
-            //load home page
-            driver.Navigate().GoToUrl("https://hmsa.com/");
-            //find anchor for "Find a Doctor"
-            IWebElement searchLink = driver.FindElement(By.LinkText("Find a Doctor"));
-            //load "Find a Doctor" page
-            searchLink.Click();
-            //enter "Nephrology" into search results
-            IWebElement queryTextBox = driver.FindElement(By.Id("query"));
-            queryTextBox.SendKeys("nephrology");
-            //choose plan
-            IWebElement plansButton = driver.FindElement(By.CssSelector("button[data-target='#plan-picker-modal']"));
-            plansButton.Click();
-            IWebElement aaCheckbox = driver.FindElement(By.CssSelector("input[value = 'HMSA Akamai Advantage']"));
-            aaCheckbox.Click();
-            IWebElement planChooserSaveChanges = driver.FindElement(By.LinkText("Save Changes"));
-            planChooserSaveChanges.Click();
-            //execute search
-            IWebElement searchButton = driver.FindElement(By.Id("search-button"));
-            searchButton.Click();
-            //pause for search results to display
-            System.Threading.Thread.Sleep(1000);
-            IWebElement firstResult = driver.FindElement(By.CssSelector(".results .result .h3"));
-            Assert.AreEqual("Aaron K Nada MD", firstResult.Text);
+            HomePage homePage = new HomePage(driver);
+            ProviderSearchPage searchPage = homePage.ClickFindADoctor();
+            ProviderSearchResultsPage resultsPage = searchPage.ExecuteSearch("nephrology", "HMSA Akamai Advantage");
+            ProviderSearchResult firstResult = resultsPage.FirstSearchResult;
+            Assert.AreEqual("Aaron K Nada MD", firstResult.ProviderName);
+        }
+        
+        [Test]
+        public void TestProviderSearchQueryDisplaysOnResultsPage()
+        {
+            ProviderSearchPage searchPage = new ProviderSearchPage(driver);
+            ProviderSearchResultsPage results = searchPage.ExecuteSearch("nephrology", "HMSA Akamai Advantage");
+            Assert.AreEqual("nephrology", results.QueryText);
         }
 
-
+        [Test]
+        [Ignore("test is not finished")]
+        public void TestProviderSearchPartialWordSpecialtyReturnsResults()
+        {
+            ProviderSearchPage searchPage = new ProviderSearchPage(driver);
+            ProviderSearchResultsPage results = searchPage.ExecuteSearch("nephrolo");
+            //Assert.That(results.AreNotEmpty());
+        }
+        
+        //tests:
+        // - test that message shows up when no plan is selected
+        // - test that health plan shows up correctly
+        
     }
 }

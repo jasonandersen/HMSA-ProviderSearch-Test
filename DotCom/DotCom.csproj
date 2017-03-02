@@ -61,15 +61,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ProviderSearchTest.cs" />
+    <Compile Include="Pages\HealthPlanSelectorPage.cs" />
+    <Compile Include="Pages\HomePage.cs" />
+    <Compile Include="Pages\PageHelper.cs" />
+    <Compile Include="Pages\ProviderSearchPage.cs" />
+    <Compile Include="ProviderSearchProceduralTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Pages\ProviderSearchResult.cs" />
+    <Compile Include="Pages\ProviderSearchResultsPage.cs" />
+    <Compile Include="ProviderSearchTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
