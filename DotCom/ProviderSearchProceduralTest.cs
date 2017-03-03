@@ -25,8 +25,7 @@ namespace DotCom
         }
 
         [Test]
-        [Ignore("don't want to run procedural tests!")]
-        public void TestProviderSearchAssertFirstResult()
+        public void TestPS()
         {
             driver.Navigate().GoToUrl("https://hmsa.com/");
             IWebElement searchLink = driver.FindElement(By.LinkText("Find a Doctor"));

@@ -3,6 +3,9 @@ using System;
 
 namespace DotCom.Pages
 {
+    /// <summary>
+    /// A single provider search result pane representing a single provider/location.
+    /// </summary>
     public class ProviderSearchResult
     {
         private IWebElement element;

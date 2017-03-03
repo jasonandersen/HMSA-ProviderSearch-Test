@@ -3,6 +3,9 @@ using OpenQA.Selenium;
 
 namespace DotCom.Pages
 {
+    /// <summary>
+    /// Represents the page displaying search results.
+    /// </summary>
     public class ProviderSearchResultsPage
     {
         private IWebDriver driver;

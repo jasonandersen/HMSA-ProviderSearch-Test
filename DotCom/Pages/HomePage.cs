@@ -3,6 +3,9 @@ using OpenQA.Selenium;
 
 namespace DotCom.Pages
 {
+    /// <summary>
+    /// Represents the home page for HMSA.com.
+    /// </summary>
     public class HomePage
     {
         private const string url = "http://hmsa.com";

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System;
 
 namespace DotCom
 {
@@ -23,6 +24,16 @@ namespace DotCom
             driver.Close();
         }
 
+
+
+
+
+
+
+
+
+
+
         [Test]
         public void TestProviderSearchFromHomePage()
         {
@@ -33,26 +44,67 @@ namespace DotCom
             Assert.AreEqual("Aaron K Nada MD", firstResult.ProviderName);
         }
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [Test]
-        public void TestProviderSearchQueryDisplaysOnResultsPage()
+        [Ignore("not implemented yet!")]
+        public void TestQueryTextDisplaysOnResultsPage()
         {
-            ProviderSearchPage searchPage = new ProviderSearchPage(driver);
-            ProviderSearchResultsPage results = searchPage.ExecuteSearch("nephrology", "HMSA Akamai Advantage");
-            Assert.AreEqual("nephrology", results.QueryText);
+            throw new NotImplementedException();
         }
 
         [Test]
-        [Ignore("test is not finished")]
-        public void TestProviderSearchPartialWordSpecialtyReturnsResults()
+        [Ignore("not implemented yet!")]
+        public void TestHealthPlanTextDisplaysOnResultsPage()
         {
-            ProviderSearchPage searchPage = new ProviderSearchPage(driver);
-            ProviderSearchResultsPage results = searchPage.ExecuteSearch("nephrolo");
-            //Assert.That(results.AreNotEmpty());
+            throw new NotImplementedException();
         }
-        
-        //tests:
-        // - test that message shows up when no plan is selected
-        // - test that health plan shows up correctly
-        
+
+        [Test]
+        [Ignore("not implemented yet!")]
+        public void TestPartialWordSpecialtyReturnsResults()
+        {
+            //test that 'nephrolo' returns Nephrology specialists
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        [Ignore("not implemented yet!")]
+        public void TestNoHealthPlanMessageDisplayed()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

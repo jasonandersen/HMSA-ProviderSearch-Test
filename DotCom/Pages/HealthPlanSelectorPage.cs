@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace DotCom.Pages
 {
+    /// <summary>
+    /// Wraps the health plan selector component to allow a user to choose health plans as a search criteria.
+    /// </summary>
     public class HealthPlanSelectorPage
     {
         private IWebDriver driver;
