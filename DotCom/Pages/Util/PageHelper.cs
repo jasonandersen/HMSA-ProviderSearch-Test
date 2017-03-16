@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using System;
 
-namespace DotCom.Pages
+namespace DotCom.Pages.Util
 {
     /// <summary>
     /// Utility class to house common methods around accessing IWebElement objects.

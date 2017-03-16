@@ -1,5 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using DotCom.Pages.ProviderSearch;
 
 namespace DotCom.Pages
 {
@@ -9,8 +11,12 @@ namespace DotCom.Pages
     public class HomePage
     {
         private const string url = "http://hmsa.com";
+
         private IWebDriver driver;
-        
+
+        [FindsBy(How = How.LinkText, Using = "Find a Doctor")]
+        private IWebElement searchLink;
+
         public HomePage(IWebDriver driver)
         {
             this.driver = driver;
@@ -23,11 +29,11 @@ namespace DotCom.Pages
             {
                 driver.Navigate().GoToUrl(url);
             }
+            PageFactory.InitElements(driver, this);
         }
         
         public ProviderSearchPage ClickFindADoctor()
         {
-            IWebElement searchLink = driver.FindElement(By.LinkText("Find a Doctor"));
             searchLink.Click();
             return new ProviderSearchPage(driver);
         }

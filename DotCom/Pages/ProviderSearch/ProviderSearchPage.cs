@@ -1,8 +1,9 @@
 ﻿using OpenQA.Selenium;
 using System.Collections.Generic;
 using System;
+using DotCom.Pages.Util;
 
-namespace DotCom.Pages
+namespace DotCom.Pages.ProviderSearch
 {
     /// <summary>
     /// Represents the Find a Doctor page.
@@ -12,8 +13,9 @@ namespace DotCom.Pages
         private const string url = "https://hmsa.com/search/providers/";
 
         private IWebDriver driver;
-        private PageHelper helper;
 
+        private PageHelper helper;
+        
         /// <summary>
         /// Constructor. Will load the provider search page only if the page isn't already loading.
         /// </summary>
@@ -64,6 +66,12 @@ namespace DotCom.Pages
             }
         }
 
+        /// <summary>
+        /// Executes a search based on the query text provider and a single chosen health plan.
+        /// </summary>
+        /// <param name="queryText"></param>
+        /// <param name="healthPlan"></param>
+        /// <returns>the results page for the search</returns>
         public ProviderSearchResultsPage ExecuteSearch(string queryText, string healthPlan = null)
         {
             this.SearchText = queryText;

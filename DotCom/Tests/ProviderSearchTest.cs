@@ -1,10 +1,12 @@
-﻿using DotCom.Pages;
+﻿using DotCom.Pages.ProviderSearch;
+using DotCom.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.PageObjects;
 using System;
 
-namespace DotCom
+namespace DotCom.Tests
 {
     [TestFixture]
     class ProviderSearchTest
@@ -24,16 +26,7 @@ namespace DotCom
             driver.Close();
         }
 
-
-
-
-
-
-
-
-
-
-
+        
         [Test]
         public void TestProviderSearchFromHomePage()
         {

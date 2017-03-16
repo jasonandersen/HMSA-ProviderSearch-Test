@@ -37,6 +37,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq, Version=4.7.1.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.7.1\lib\net45\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -47,8 +55,12 @@
       <HintPath>..\packages\SpecFlow.2.1.0\lib\net45\TechTalk.SpecFlow.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebDriver, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.3.2.0\lib\net40\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.3.0\lib\net40\WebDriver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=3.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.3.0\lib\net40\WebDriver.Support.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -65,29 +77,30 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Pages\HealthPlanSelectorPage.cs" />
+    <Compile Include="Pages\ProviderSearch\HealthPlanSelectorPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
-    <Compile Include="Pages\PageHelper.cs" />
-    <Compile Include="Pages\ProviderSearchPage.cs" />
-    <Compile Include="ProviderSearchProceduralTest.cs" />
+    <Compile Include="Pages\Util\PageHelper.cs" />
+    <Compile Include="Pages\ProviderSearch\ProviderSearchPage.cs" />
+    <Compile Include="Tests\MockTests.cs" />
+    <Compile Include="Tests\ProviderSearchProceduralTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pages\ProviderSearchResult.cs" />
-    <Compile Include="Pages\ProviderSearchResultsPage.cs" />
-    <Compile Include="ProviderSearchTest.cs" />
-    <Compile Include="SpecFlowNUnitExtension.cs" />
-    <Compile Include="Specs\ProviderSearch.feature.cs">
+    <Compile Include="Pages\ProviderSearch\ProviderSearchResult.cs" />
+    <Compile Include="Pages\ProviderSearch\ProviderSearchResultsPage.cs" />
+    <Compile Include="Tests\ProviderSearchTest.cs" />
+    <Compile Include="Specs\ProviderSearch\BasicProviderSearch.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ProviderSearch.feature</DependentUpon>
+      <DependentUpon>BasicProviderSearch.feature</DependentUpon>
     </Compile>
-    <Compile Include="Specs\ProviderSearchSteps.cs" />
+    <Compile Include="Specs\ProviderSearch\ProviderSearchBasicResult.cs" />
+    <Compile Include="Specs\ProviderSearch\ProviderSearchSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Specs\ProviderSearch.feature">
+    <None Include="Specs\ProviderSearch\BasicProviderSearch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ProviderSearch.feature.cs</LastGenOutput>
+      <LastGenOutput>BasicProviderSearch.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup />
