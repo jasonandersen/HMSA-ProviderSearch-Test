@@ -1,2 +1,6 @@
 # HMSA-ProviderSearch-Test
-Test automation for HMSA.com's provider search feature using C#, Selenium and SpecFlow.
+This project serves as an example of simple test automation for a browser-based UI. We use the following toolsets:
+* C# (the solution was created in Visual Studio 2015)
+* Selenium
+* SpecFlow
+* NUnit
