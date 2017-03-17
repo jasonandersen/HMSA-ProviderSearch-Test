@@ -153,6 +153,38 @@ this.FeatureBackground();
                         "HI",
                         "96796",
                         "(808) 338-8311"});
+            table3.AddRow(new string[] {
+                        "Aaron K Nada MD",
+                        "Nephrology",
+                        "98-1247 Kaahumanu St , Suite 315",
+                        "Aiea",
+                        "HI",
+                        "96701",
+                        "(808) 523-0445"});
+            table3.AddRow(new string[] {
+                        "Aaron K Nada MD",
+                        "Nephrology",
+                        "98-211 Pali Momi St , Suite 320",
+                        "Aiea",
+                        "HI",
+                        "96701",
+                        "(808) 523-0445"});
+            table3.AddRow(new string[] {
+                        "Aaron K Nada MD",
+                        "Nephrology",
+                        "98-1079 Moanalua Rd , Suite 250",
+                        "Aiea",
+                        "HI",
+                        "96701",
+                        "(808) 523-0445"});
+            table3.AddRow(new string[] {
+                        "Aaron K Nada MD",
+                        "Nephrology",
+                        "1520 Liliha St , Suite 601",
+                        "Honolulu",
+                        "HI",
+                        "96817",
+                        "(808) 523-0445"});
 #line 25
  testRunner.And("I see these results:", ((string)(null)), table3, "And ");
 #line hidden
@@ -164,11 +196,11 @@ this.FeatureBackground();
         public virtual void LinkToAMapOfTheProvidersAddress()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Link to a map of the providers address", ((string[])(null)));
-#line 30
+#line 34
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 31
+#line 35
  testRunner.Given("I search for \'nephrology\' with this health plan: \'HMSA Akamai Advantage\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -187,16 +219,16 @@ this.FeatureBackground();
                         "HI",
                         "96796",
                         "(808) 338-8311"});
-#line 32
+#line 36
  testRunner.And("the first result is:", ((string)(null)), table4, "And ");
-#line 35
+#line 39
  testRunner.When("I select Map on the first result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Address"});
             table5.AddRow(new string[] {
                         "1520 Liliha St Suite 601, Honolulu HI, 98617"});
-#line 36
+#line 40
  testRunner.Then("I see a Google Maps page in a separate window for this address:", ((string)(null)), table5, "Then ");
 #line hidden
             this.ScenarioCleanup();

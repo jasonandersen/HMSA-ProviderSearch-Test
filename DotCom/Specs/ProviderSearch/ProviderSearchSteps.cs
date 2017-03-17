@@ -23,7 +23,7 @@ namespace DotCom.Specs.ProviderSearch
         // The home page loaded in the browser
         private HomePage homePage;
 
-        // The provider search page
+        // The provider search page loaded in the browser
         private ProviderSearchPage providerSearchPage;
 
         // The provider search results page that returned from a search execution
@@ -65,7 +65,7 @@ namespace DotCom.Specs.ProviderSearch
         }
 
         [Given(@"the provider '(.*)' accepts '(.*)'")]
-        public void TheProviderAcceptsPlan(string p0, string p1)
+        public void TheProviderAccepts(string p0, string p1)
         {
             // precondition: normally we would ensure we insert this data into our test environment
         }
@@ -131,11 +131,13 @@ namespace DotCom.Specs.ProviderSearch
         {
             ProviderSearchResult firstResult = searchResultsPage.FirstSearchResult;
             locationMapPage = firstResult.ClickMap();
+            PageHelper helper = new PageHelper(driver);
         }
 
         [Then(@"I see a Google Maps page in a separate window for this address:")]
         public void ThenISeeAGoogleMapsPageInASeparateWindowForThisAddress(Table table)
         {
+
             ScenarioContext.Current.Pending();
         }
 

@@ -5,12 +5,13 @@ using System;
 namespace DotCom.Pages.Util
 {
     /// <summary>
-    /// Utility class to house common methods around accessing IWebElement objects.
+    /// Utility class to house common methods around interacting with IWebElement objects.
     /// </summary>
     class PageHelper
     {
         // Search context to find page elements. Can be either an IWebDriver (the browser) or
-        // an IWebElement (an element on the page to search within).
+        // an IWebElement (an HTML element on the page). If this is an IWebElement, then it will 
+        // only search for child elements of the specified element.
         private ISearchContext searchContext;
 
         /// <summary>
@@ -106,6 +107,25 @@ namespace DotCom.Pages.Util
         {
             IWebElement element = searchContext.FindElement(by);
             element.SendKeys(newValue);
+        }
+
+        /// <summary>
+        /// Will switch
+        /// </summary>
+        /// <exception cref="InvalidOperationException">thrown when this page helper wraps an element, not a driver</exception>
+        public void SwitchToMostRecentPage()
+        {
+            IWebDriver driver;
+            if (searchContext is IWebDriver)
+            {
+                driver = (IWebDriver)searchContext;
+            } else 
+            {
+                // This doesn't make sense to switch when the root search context is an 
+                // element, not a web driver.
+                throw new InvalidOperationException();
+            }
+            throw new NotImplementedException();
         }
     }
 }
