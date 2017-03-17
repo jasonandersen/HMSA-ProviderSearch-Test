@@ -1,5 +1,5 @@
 # HMSA-ProviderSearch-Test
-This project serves as an example of simple test automation for a browser-based UI. We use the following toolsets:
+This project serves as an example of simple test automation for a browser-based UI. For these tests, we are going to test the HMSA.com provider search feature. In order to create the tests, we use the following toolsets:
 * C# (the solution was created in Visual Studio 2015)
 * Selenium
 * SpecFlow
