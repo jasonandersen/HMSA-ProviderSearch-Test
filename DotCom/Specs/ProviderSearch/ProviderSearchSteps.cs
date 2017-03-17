@@ -51,6 +51,8 @@ namespace DotCom.Specs.ProviderSearch
         {
             if (driver != null)
             {
+                // Calling driver.Quit() instead of driver.Close() will ensure that any child browser windows will
+                // also get closed down.
                 driver.Quit();
             }
         }
@@ -91,7 +93,7 @@ namespace DotCom.Specs.ProviderSearch
         public void GivenTheFirstResultIs(Table table)
         {
             // Grab the expected results from the table within the scenario
-            IEnumerable<ProviderSearchBasicResult> expected = table.CreateSet<ProviderSearchBasicResult>();
+            IEnumerable<ProviderSearchExpectedResult> expected = table.CreateSet<ProviderSearchExpectedResult>();
 
             // Grab the actual results from the provider search results page
             IList<ProviderSearchResult> actual = new List<ProviderSearchResult>();
@@ -116,7 +118,7 @@ namespace DotCom.Specs.ProviderSearch
         public void ISeeTheseResults(Table table)
         {
             // Grab the expected results from the table within the scenario
-            IEnumerable<ProviderSearchBasicResult> expectedResults = table.CreateSet<ProviderSearchBasicResult>();
+            IEnumerable<ProviderSearchExpectedResult> expectedResults = table.CreateSet<ProviderSearchExpectedResult>();
 
             // Grab the actual results from the provider search results page
             IList<ProviderSearchResult> actualResults = searchResultsPage.AllSearchResults;
@@ -151,17 +153,18 @@ namespace DotCom.Specs.ProviderSearch
         }
 
         /// <summary>
-        /// Compares a list of expected provider search results to a list of actual provider search results. If no match
-        /// is found, than an assertion exception will be thrown.
+        /// Compares a list of expected provider search results to a list of actual provider search results. If all results
+        /// don't match exactly, than an assertion exception will be thrown.
         /// </summary>
         /// <param name="expectedResults"></param>
         /// <param name="actualResults"></param>
-        private void AssertMatches(IEnumerable<ProviderSearchBasicResult> expectedResults, IList<ProviderSearchResult> actualResults)
+        /// <exception cref="AssertionException">thrown when all the results don't match exactly</exception>
+        private void AssertMatches(IEnumerable<ProviderSearchExpectedResult> expectedResults, IList<ProviderSearchResult> actualResults)
         {
             // Iterate through the expected results and ensure that each actual result at the same index matches
             // the expected results
             int resultIndex = 0;
-            foreach (ProviderSearchBasicResult expectedResult in expectedResults)
+            foreach (ProviderSearchExpectedResult expectedResult in expectedResults)
             {
                 ProviderSearchResult actualResult = actualResults[resultIndex];
                 Assert.AreEqual(expectedResult.Name, actualResult.ProviderName);

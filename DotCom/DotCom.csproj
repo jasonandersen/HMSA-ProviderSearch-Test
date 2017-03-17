@@ -93,7 +93,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BasicProviderSearch.feature</DependentUpon>
     </Compile>
-    <Compile Include="Specs\ProviderSearch\ProviderSearchBasicResult.cs" />
+    <Compile Include="Specs\ProviderSearch\ProviderSearchExpectedResult.cs" />
     <Compile Include="Specs\ProviderSearch\ProviderSearchSteps.cs" />
   </ItemGroup>
   <ItemGroup>
