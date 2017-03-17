@@ -10,22 +10,42 @@ using TechTalk.SpecFlow.Assist;
 
 namespace DotCom.Specs.ProviderSearch
 {
+    /// <summary>
+    /// This class houses the glue code for the steps in the BDD scenarios for provider searching.
+    /// </summary>
     [Binding]
     public class ProviderSearchSteps
     {
 
+        // The browser to interact with
         private IWebDriver driver;
+
+        // The home page loaded in the browser
         private HomePage homePage;
+
+        // The provider search page
         private ProviderSearchPage providerSearchPage;
+
+        // The provider search results page that returned from a search execution
         private ProviderSearchResultsPage searchResultsPage;
+
+        // The Google Maps location page returned from a map link
         private LocationMapPage locationMapPage;
 
+        /// <summary>
+        /// This method will execute before every test scenario that SpecFlow runs.
+        /// </summary>
         [Before]
         public void SetupBrowser()
         {
+            // Default the browser to a new instance of Chrome.
             this.driver = new ChromeDriver();
         }
 
+        /// <summary>
+        /// This method will run after the completion of each test scenario. It will ensure any 
+        /// open browsers will be shut down.
+        /// </summary>
         [After]
         public void TearDownBrowser()
         {
@@ -70,9 +90,13 @@ namespace DotCom.Specs.ProviderSearch
         [Given(@"the first result is:")]
         public void GivenTheFirstResultIs(Table table)
         {
+            // Grab the expected results from the table within the scenario
             IEnumerable<ProviderSearchBasicResult> expected = table.CreateSet<ProviderSearchBasicResult>();
+
+            // Grab the actual results from the provider search results page
             IList<ProviderSearchResult> actual = new List<ProviderSearchResult>();
             actual.Add(searchResultsPage.FirstSearchResult);
+            
             AssertMatches(expected, actual);
         }
 
@@ -80,6 +104,7 @@ namespace DotCom.Specs.ProviderSearch
         [Given(@"I search for '(.*)' with this health plan: '(.*)'")]
         public void ISearchForProviderWithThisHealthPlan(string queryText, string healthPlan)
         {
+            // Make sure the provider search page is loaded in the browser
             if (providerSearchPage == null)
             {
                 providerSearchPage = new ProviderSearchPage(driver);
@@ -90,8 +115,12 @@ namespace DotCom.Specs.ProviderSearch
         [Then(@"I see these results:")]
         public void ISeeTheseResults(Table table)
         {
+            // Grab the expected results from the table within the scenario
             IEnumerable<ProviderSearchBasicResult> expectedResults = table.CreateSet<ProviderSearchBasicResult>();
+
+            // Grab the actual results from the provider search results page
             IList<ProviderSearchResult> actualResults = searchResultsPage.AllSearchResults;
+
             AssertMatches(expectedResults, actualResults);
         }
         
@@ -121,8 +150,16 @@ namespace DotCom.Specs.ProviderSearch
             Assert.AreEqual(searchPlan, searchResultsPage.HealthPlan);
         }
 
+        /// <summary>
+        /// Compares a list of expected provider search results to a list of actual provider search results. If no match
+        /// is found, than an assertion exception will be thrown.
+        /// </summary>
+        /// <param name="expectedResults"></param>
+        /// <param name="actualResults"></param>
         private void AssertMatches(IEnumerable<ProviderSearchBasicResult> expectedResults, IList<ProviderSearchResult> actualResults)
         {
+            // Iterate through the expected results and ensure that each actual result at the same index matches
+            // the expected results
             int resultIndex = 0;
             foreach (ProviderSearchBasicResult expectedResult in expectedResults)
             {

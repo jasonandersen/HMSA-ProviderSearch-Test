@@ -10,14 +10,23 @@ namespace DotCom.Pages.ProviderSearch
     /// </summary>
     public class ProviderSearchResultsPage
     {
+        // The browser to interact with
         private IWebDriver driver;
+
         private PageHelper helper;
 
+        /// <summary>
+        /// Constructor to create the class.
+        /// </summary>
+        /// <param name="driver">The browser to interact with</param>
         public ProviderSearchResultsPage(IWebDriver driver)
         {
             this.driver = driver;
             this.helper = new PageHelper(driver);
-            pauseForSearchResults();
+            
+            // Because this page loads the results from an AJAX call, we have to pause while the results
+            // finish loading. Once they're loaded, we can then access all the search results.
+            PauseForSearchResultsToLoad();
         }
 
         /// <summary>
@@ -28,7 +37,7 @@ namespace DotCom.Pages.ProviderSearch
             get
             {
                 List<ProviderSearchResult> results = new List<ProviderSearchResult>();
-                pauseForSearchResults();
+                PauseForSearchResultsToLoad();
                 if (AreResultsLoaded())
                 {
                     ICollection<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='results']/div"));
@@ -95,7 +104,7 @@ namespace DotCom.Pages.ProviderSearch
         ///  The search results page initially loads with a spinner while the results are loaded
         ///  asynchronously. This method will pause until the results have been loaded.
         /// </summary>
-        private void pauseForSearchResults()
+        private void PauseForSearchResultsToLoad()
         {
             while (!AreResultsLoaded())
             {
@@ -106,7 +115,7 @@ namespace DotCom.Pages.ProviderSearch
         /// <summary>
         /// Determines if the search results have been loaded.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if the results are finished loading</returns>
         private bool AreResultsLoaded()
         {
             return helper.ElementExists(By.XPath("//div[@class='results']/div[1]/div[1]/div[1]/div[@class='h3']"));
@@ -121,6 +130,10 @@ namespace DotCom.Pages.ProviderSearch
             return helper.ElementExists(By.CssSelector("div.pager p.results-count"));
         }
 
+        /// <summary>
+        /// Causes the executing thread to pause for the specified amount of milliseconds.
+        /// </summary>
+        /// <param name="milliseconds"></param>
         private void wait(int milliseconds)
         {
             System.Threading.Thread.Sleep(milliseconds);

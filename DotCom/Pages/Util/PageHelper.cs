@@ -9,6 +9,8 @@ namespace DotCom.Pages.Util
     /// </summary>
     class PageHelper
     {
+        // Search context to find page elements. Can be either an IWebDriver (the browser) or
+        // an IWebElement (an element on the page to search within).
         private ISearchContext searchContext;
 
         /// <summary>
@@ -36,7 +38,7 @@ namespace DotCom.Pages.Util
                 IWebElement element = searchContext.FindElement(by);
                 return element != null;
             }
-            catch (NoSuchElementException e)
+            catch (NoSuchElementException)
             {
                 return false;
             }

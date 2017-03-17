@@ -10,15 +10,16 @@ namespace DotCom.Pages.ProviderSearch
     /// </summary>
     public class HealthPlanSelectorPage
     {
+        //The browser to interact with
         private IWebDriver driver;
-
+        
         private PageHelper helper;
         
         /// <summary>
         /// Constructor. The health plan selector modal must already be displayed prior to calling
         /// this constructor. Will not load any page. 
         /// </summary>
-        /// <param name="driver"></param>
+        /// <param name="driver">The browser to interact with</param>
         public HealthPlanSelectorPage(IWebDriver driver)
         {
             this.driver = driver;
@@ -48,6 +49,9 @@ namespace DotCom.Pages.ProviderSearch
             }
         }
 
+        /// <summary>
+        /// Send a click to the save changes button.
+        /// </summary>
         public void ClickSaveChanges()
         {
             helper.ClickElement(By.LinkText("Save Changes"));

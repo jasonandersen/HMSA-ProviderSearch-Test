@@ -12,6 +12,7 @@ namespace DotCom.Pages.ProviderSearch
     {
         private const string url = "https://hmsa.com/search/providers/";
 
+        //The browser to interact with
         private IWebDriver driver;
 
         private PageHelper helper;
@@ -19,7 +20,7 @@ namespace DotCom.Pages.ProviderSearch
         /// <summary>
         /// Constructor. Will load the provider search page only if the page isn't already loading.
         /// </summary>
-        /// <param name="driver"></param>
+        /// <param name="driver">The browser to interact with</param>
         public ProviderSearchPage(IWebDriver driver)
         {
             this.driver = driver;
@@ -47,19 +48,10 @@ namespace DotCom.Pages.ProviderSearch
             }
         }
 
-        private HealthPlanSelectorPage ClickSelectHealthPlan()
-        {
-            helper.ClickElement(By.CssSelector("button[data-target='#plan-picker-modal']"));
-            return new HealthPlanSelectorPage(driver);
-        }
-
-        public ProviderSearchResultsPage ClickSubmitSearch()
-        {
-            helper.ClickElement(By.Id("search-button"));
-            return new ProviderSearchResultsPage(driver);
-        }
-
-        public string SearchText {
+        /// <summary>
+        /// Sets the text to query against.
+        /// </summary>
+        public string QueryText {
             set
             {
                 helper.SetElementValue(By.Id("query"), value);
@@ -74,12 +66,33 @@ namespace DotCom.Pages.ProviderSearch
         /// <returns>the results page for the search</returns>
         public ProviderSearchResultsPage ExecuteSearch(string queryText, string healthPlan = null)
         {
-            this.SearchText = queryText;
+            this.QueryText = queryText;
             if (healthPlan != null)
             {
                 this.HealthPlan = healthPlan;
             }
             return ClickSubmitSearch();
         }
+
+        /// <summary>
+        /// Clicks the button to select a health plan and then returns the page object wrapping the modal overlay
+        /// </summary>
+        /// <returns></returns>
+        private HealthPlanSelectorPage ClickSelectHealthPlan()
+        {
+            helper.ClickElement(By.CssSelector("button[data-target='#plan-picker-modal']"));
+            return new HealthPlanSelectorPage(driver);
+        }
+
+        /// <summary>
+        /// Clicks the button to submit the search and returns a page object wrapping the search results.
+        /// </summary>
+        /// <returns></returns>
+        private ProviderSearchResultsPage ClickSubmitSearch()
+        {
+            helper.ClickElement(By.Id("search-button"));
+            return new ProviderSearchResultsPage(driver);
+        }
+
     }
 }

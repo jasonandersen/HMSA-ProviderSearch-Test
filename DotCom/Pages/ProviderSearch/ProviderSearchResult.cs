@@ -9,9 +9,15 @@ namespace DotCom.Pages.ProviderSearch
     /// </summary>
     public class ProviderSearchResult
     {
+        // The web element (div) containing the single provider search result
         private IWebElement element;
+
         private PageHelper helper;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="element">the web element (div) containing the single provider search result</param>
         public ProviderSearchResult(IWebElement element)
         {
             this.element = element;
@@ -41,6 +47,8 @@ namespace DotCom.Pages.ProviderSearch
         {
             get
             {
+                // Phone number comes across as multi-lines of text. We only want the second line that contains
+                // the actual phone number.
                 string phoneText = helper.GetElementText(By.CssSelector("div.result-phone"));
                 string[] lines = phoneText.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                 return lines[1];
@@ -130,6 +138,10 @@ namespace DotCom.Pages.ProviderSearch
             return new LocationMapPage();
         }
 
+        /// <summary>
+        /// Retrieves all the lines in the provider location address split up into individual lines.
+        /// </summary>
+        /// <returns></returns>
         private string[] GetAddressLines()
         {
             string addressText = helper.GetElementText(By.CssSelector("div.result-address"));

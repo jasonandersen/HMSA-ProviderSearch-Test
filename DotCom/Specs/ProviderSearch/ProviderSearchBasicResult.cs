@@ -7,6 +7,11 @@ using TechTalk.SpecFlow;
 
 namespace DotCom.Specs.ProviderSearch
 {
+    /// <summary>
+    /// This is a simple data structure representing data that comes back in a provider search result.
+    /// We use this object to setup the results that we expect to get back from a test and then compare
+    /// it with the data that actually came back from the test.
+    /// </summary>
     public class ProviderSearchBasicResult
     {
         private string name;
