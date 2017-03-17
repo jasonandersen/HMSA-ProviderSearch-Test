@@ -18,6 +18,7 @@ namespace DotCom.Specs.ProviderSearch
         private HomePage homePage;
         private ProviderSearchPage providerSearchPage;
         private ProviderSearchResultsPage searchResultsPage;
+        private LocationMapPage locationMapPage;
 
         [Before]
         public void SetupBrowser()
@@ -30,7 +31,7 @@ namespace DotCom.Specs.ProviderSearch
         {
             if (driver != null)
             {
-                driver.Close();
+                driver.Quit();
             }
         }
 
@@ -98,7 +99,7 @@ namespace DotCom.Specs.ProviderSearch
         public void WhenISelectMapOnTheFirstResult()
         {
             ProviderSearchResult firstResult = searchResultsPage.FirstSearchResult;
-            firstResult.ClickMap();
+            locationMapPage = firstResult.ClickMap();
         }
 
         [Then(@"I see a Google Maps page in a separate window for this address:")]
@@ -129,6 +130,10 @@ namespace DotCom.Specs.ProviderSearch
                 Assert.AreEqual(expectedResult.Name, actualResult.ProviderName);
                 Assert.AreEqual(expectedResult.Specialty, actualResult.Specialty);
                 Assert.AreEqual(expectedResult.Line1, actualResult.Line1);
+                Assert.AreEqual(expectedResult.City, actualResult.City);
+                Assert.AreEqual(expectedResult.State, actualResult.State);
+                Assert.AreEqual(expectedResult.Zip, actualResult.Zip);
+                Assert.AreEqual(expectedResult.Phone, actualResult.Phone);
                 resultIndex++;
             }
         }

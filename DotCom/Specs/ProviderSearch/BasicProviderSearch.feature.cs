@@ -86,7 +86,7 @@ namespace DotCom.Specs.ProviderSearch
                         "Line 1",
                         "Line 2",
                         "City",
-                        "ST",
+                        "State",
                         "Zip",
                         "Phone"});
             table2.AddRow(new string[] {
@@ -142,7 +142,7 @@ this.FeatureBackground();
                         "Specialty",
                         "Line 1",
                         "City",
-                        "ST",
+                        "State",
                         "Zip",
                         "Phone"});
             table3.AddRow(new string[] {
@@ -176,7 +176,7 @@ this.FeatureBackground();
                         "Specialty",
                         "Line 1",
                         "City",
-                        "ST",
+                        "State",
                         "Zip",
                         "Phone"});
             table4.AddRow(new string[] {
