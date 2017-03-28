@@ -1,10 +1,12 @@
 ﻿using DotCom.Pages;
 using DotCom.Pages.ProviderSearch;
+using DotCom.Pages.Util;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -19,6 +21,9 @@ namespace DotCom.Specs.ProviderSearch
 
         // The browser to interact with
         private IWebDriver driver;
+
+        // Helper class to assist with interacting with the driver object
+        private WebDriverHelper helper;
 
         // The home page loaded in the browser
         private HomePage homePage;
@@ -40,6 +45,7 @@ namespace DotCom.Specs.ProviderSearch
         {
             // Default the browser to a new instance of Chrome.
             this.driver = new ChromeDriver();
+            this.helper = new WebDriverHelper(driver);
         }
 
         /// <summary>
@@ -124,23 +130,22 @@ namespace DotCom.Specs.ProviderSearch
             IList<ProviderSearchResult> actualResults = searchResultsPage.AllSearchResults;
 
             AssertMatches(expectedResults, actualResults);
-        }
+        } 
         
         [When(@"I select Map on the first result")]
         public void WhenISelectMapOnTheFirstResult()
         {
             ProviderSearchResult firstResult = searchResultsPage.FirstSearchResult;
             locationMapPage = firstResult.ClickMap();
-            PageHelper helper = new PageHelper(driver);
+            helper.SwitchToMostRecentPage();
         }
 
         [Then(@"I see a Google Maps page in a separate window for this address:")]
         public void ThenISeeAGoogleMapsPageInASeparateWindowForThisAddress(Table table)
         {
-
-            ScenarioContext.Current.Pending();
+            TableRow firstRow = table.Rows[0];
+            Assert.AreEqual(firstRow.Values.First(), locationMapPage.Address);
         }
-
 
         [Then(@"I see my search query is '(.*)'")]
         public void ISeeMyQueryIs(string searchQuery)

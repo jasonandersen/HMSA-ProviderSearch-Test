@@ -13,7 +13,7 @@ namespace DotCom.Pages.ProviderSearch
         //The browser to interact with
         private IWebDriver driver;
         
-        private PageHelper helper;
+        private WebDriverHelper helper;
         
         /// <summary>
         /// Constructor. The health plan selector modal must already be displayed prior to calling
@@ -23,7 +23,7 @@ namespace DotCom.Pages.ProviderSearch
         public HealthPlanSelectorPage(IWebDriver driver)
         {
             this.driver = driver;
-            this.helper = new PageHelper(driver);
+            this.helper = new WebDriverHelper(driver);
         }
 
         /// <summary>

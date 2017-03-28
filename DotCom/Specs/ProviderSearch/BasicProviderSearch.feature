@@ -35,7 +35,7 @@ Scenario: Link to a map of the providers address
 	Given I search for 'nephrology' with this health plan: 'HMSA Akamai Advantage'
 	And the first result is:
 		| Name            | Specialty  | Line 1						| City		| State | Zip		| Phone			 |
-		| Aaron K Nada MD | Nephrology | 4643B Waimea Canyon Dr		| Waimea	| HI	| 96796		| (808) 338-8311 |
+		| Aaron K Nada MD | Nephrology | 1520 Liliha St , Suite 601	| Honolulu	| HI	| 96817		| (808) 523-0445 |
 	When I select Map on the first result
 	Then I see a Google Maps page in a separate window for this address:
 		| Address										|

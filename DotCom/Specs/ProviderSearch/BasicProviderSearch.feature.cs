@@ -214,11 +214,11 @@ this.FeatureBackground();
             table4.AddRow(new string[] {
                         "Aaron K Nada MD",
                         "Nephrology",
-                        "4643B Waimea Canyon Dr",
-                        "Waimea",
+                        "1520 Liliha St , Suite 601",
+                        "Honolulu",
                         "HI",
-                        "96796",
-                        "(808) 338-8311"});
+                        "96817",
+                        "(808) 523-0445"});
 #line 36
  testRunner.And("the first result is:", ((string)(null)), table4, "And ");
 #line 39

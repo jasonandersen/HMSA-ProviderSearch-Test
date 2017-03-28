@@ -79,9 +79,11 @@
   <ItemGroup>
     <Compile Include="Pages\ProviderSearch\HealthPlanSelectorPage.cs" />
     <Compile Include="Pages\HomePage.cs" />
-    <Compile Include="Pages\Util\PageHelper.cs" />
+    <Compile Include="Pages\Util\SearchContextWrapper.cs" />
     <Compile Include="Pages\ProviderSearch\ProviderSearchPage.cs" />
     <Compile Include="Pages\ProviderSearch\LocationMapPage.cs" />
+    <Compile Include="Pages\Util\WebDriverHelper.cs" />
+    <Compile Include="Pages\Util\WebElementHelper.cs" />
     <Compile Include="Tests\MockTests.cs" />
     <Compile Include="Tests\ProviderSearchProceduralTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

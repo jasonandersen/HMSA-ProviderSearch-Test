@@ -1,13 +1,15 @@
 ﻿
 using OpenQA.Selenium;
 using System;
+using System.Diagnostics;
 
 namespace DotCom.Pages.Util
 {
     /// <summary>
-    /// Utility class to house common methods around interacting with IWebElement objects.
+    /// Utility class to house common methods around interacting with ISearchContext (IWebElement or
+    /// IWebDriver) objects.
     /// </summary>
-    class PageHelper
+    public abstract class SearchContextWrapper
     {
         // Search context to find page elements. Can be either an IWebDriver (the browser) or
         // an IWebElement (an HTML element on the page). If this is an IWebElement, then it will 
@@ -18,7 +20,7 @@ namespace DotCom.Pages.Util
         /// Constructor.
         /// </summary>
         /// <param name="searchContext">WebDriver or WebElement to search for elements</param>
-        public PageHelper(ISearchContext searchContext)
+        public SearchContextWrapper(ISearchContext searchContext)
         {
             this.searchContext = searchContext;
             if (searchContext == null)
@@ -110,22 +112,26 @@ namespace DotCom.Pages.Util
         }
 
         /// <summary>
-        /// Will switch
+        /// Waits for an element to appear. 
         /// </summary>
-        /// <exception cref="InvalidOperationException">thrown when this page helper wraps an element, not a driver</exception>
-        public void SwitchToMostRecentPage()
+        /// <param name="by">The search algorithm to find the element</param>
+        /// <param name="pollingFrequency">How often (in milliseconds) to check for it's existence</param>
+        /// <param name="timeout">How long (in milliseconds) to wait before timing out</param>
+        /// <exception cref="NoSuchElementException">when timeout is reached</exception>
+        public void WaitForElement(By by, int pollingFrequency = 200, int timeout = 1000)
         {
-            IWebDriver driver;
-            if (searchContext is IWebDriver)
+            Stopwatch watch = Stopwatch.StartNew();
+            while (watch.Elapsed.Milliseconds < timeout)
             {
-                driver = (IWebDriver)searchContext;
-            } else 
-            {
-                // This doesn't make sense to switch when the root search context is an 
-                // element, not a web driver.
-                throw new InvalidOperationException();
+                if (ElementExists(by))
+                {
+                    return;
+                }
+                System.Threading.Thread.Sleep(pollingFrequency);
             }
-            throw new NotImplementedException();
+            throw new NoSuchElementException("Element could not be found!");
         }
+
+        
     }
 }

@@ -13,7 +13,7 @@ namespace DotCom.Pages.ProviderSearch
         // The browser to interact with
         private IWebDriver driver;
 
-        private PageHelper helper;
+        private WebDriverHelper helper;
 
         /// <summary>
         /// Constructor to create the class.
@@ -22,7 +22,7 @@ namespace DotCom.Pages.ProviderSearch
         public ProviderSearchResultsPage(IWebDriver driver)
         {
             this.driver = driver;
-            this.helper = new PageHelper(driver);
+            this.helper = new WebDriverHelper(driver);
             
             // Because this page loads the results from an AJAX call, we have to pause while the results
             // finish loading. Once they're loaded, we can then access all the search results.

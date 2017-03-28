@@ -15,7 +15,7 @@ namespace DotCom.Pages.ProviderSearch
         //The browser to interact with
         private IWebDriver driver;
 
-        private PageHelper helper;
+        private WebDriverHelper helper;
         
         /// <summary>
         /// Constructor. Will load the provider search page only if the page isn't already loading.
@@ -28,7 +28,7 @@ namespace DotCom.Pages.ProviderSearch
             {
                 throw new NullReferenceException();
             }
-            this.helper = new PageHelper(driver);
+            this.helper = new WebDriverHelper(driver);
             if (!driver.Url.StartsWith(url))
             {
                 driver.Navigate().GoToUrl(url);

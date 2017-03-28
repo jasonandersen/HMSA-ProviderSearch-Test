@@ -12,7 +12,7 @@ namespace DotCom.Pages.ProviderSearch
         // The web element (div) containing the single provider search result
         private IWebElement element;
 
-        private PageHelper helper;
+        private WebElementHelper helper;
 
         /// <summary>
         /// Constructor
@@ -25,7 +25,7 @@ namespace DotCom.Pages.ProviderSearch
             {
                 throw new NullReferenceException();
             }
-            this.helper = new PageHelper(element);
+            this.helper = new WebElementHelper(element);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace DotCom.Pages.ProviderSearch
         public LocationMapPage ClickMap()
         {
             helper.ClickElement(By.CssSelector("div.result-address a"));
-            return new LocationMapPage();
+            return new LocationMapPage(helper.Driver);
         }
 
         /// <summary>
