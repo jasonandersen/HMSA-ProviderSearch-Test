@@ -1,9 +1,8 @@
-﻿
 using OpenQA.Selenium;
 using System;
 using System.Diagnostics;
 
-namespace DotCom.Pages.Util
+namespace PegaSmokeTests.Util.Selenium
 {
     /// <summary>
     /// Utility class to house common methods around interacting with ISearchContext (IWebElement or
@@ -12,10 +11,9 @@ namespace DotCom.Pages.Util
     public abstract class SearchContextWrapper
     {
         // Search context to find page elements. Can be either an IWebDriver (the browser) or
-        // an IWebElement (an HTML element on the page). If this is an IWebElement, then it will 
+        // an IWebElement (an HTML element on the page). If this is an IWebElement, then it will
         // only search for child elements of the specified element.
         private ISearchContext searchContext;
-
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -27,6 +25,17 @@ namespace DotCom.Pages.Util
             {
                 throw new NullReferenceException();
             }
+        }
+
+        /// <summary>
+        /// Finds an element within this search context (either the web driver or the parent web element).
+        /// </summary>
+        /// <param name="by"></param>
+        /// <returns>the first element that matches the By argument</returns>
+        /// <exception cref="NoSuchElementException">when the element cannot be found</exception>
+        public IWebElement FindElement(By by)
+        {
+            return searchContext.FindElement(by);
         }
 
         /// <summary>
@@ -46,7 +55,6 @@ namespace DotCom.Pages.Util
                 return false;
             }
         }
-
         /// <summary>
         /// Retrieve the text of the element.
         /// </summary>
@@ -58,7 +66,6 @@ namespace DotCom.Pages.Util
             IWebElement element = searchContext.FindElement(by);
             return element.Text;
         }
-
         /// <summary>
         /// Ensures selected value of a checkbox matches the selected param.
         /// </summary>
@@ -75,7 +82,6 @@ namespace DotCom.Pages.Util
                 checkbox.Click();
             }
         }
-
         /// <summary>
         /// Clicks the first element found.
         /// </summary>
@@ -86,7 +92,6 @@ namespace DotCom.Pages.Util
             IWebElement element = searchContext.FindElement(by);
             element.Click();
         }
-
         /// <summary>
         /// Retrieves the value of the first element found.
         /// </summary>
@@ -98,7 +103,6 @@ namespace DotCom.Pages.Util
             IWebElement element = searchContext.FindElement(by);
             return element.GetAttribute("value");
         }
-        
         /// <summary>
         /// Sets the value of the first element found.
         /// </summary>
@@ -110,9 +114,8 @@ namespace DotCom.Pages.Util
             IWebElement element = searchContext.FindElement(by);
             element.SendKeys(newValue);
         }
-
         /// <summary>
-        /// Waits for an element to appear. 
+        /// Waits for an element to appear.
         /// </summary>
         /// <param name="by">The search algorithm to find the element</param>
         /// <param name="pollingFrequency">How often (in milliseconds) to check for it's existence</param>
@@ -121,7 +124,7 @@ namespace DotCom.Pages.Util
         public void WaitForElement(By by, int pollingFrequency = 200, int timeout = 1000)
         {
             Stopwatch watch = Stopwatch.StartNew();
-            while (watch.Elapsed.Milliseconds < timeout)
+            while (watch.IsRunning && watch.ElapsedMilliseconds < timeout)
             {
                 if (ElementExists(by))
                 {
@@ -129,9 +132,16 @@ namespace DotCom.Pages.Util
                 }
                 System.Threading.Thread.Sleep(pollingFrequency);
             }
-            throw new NoSuchElementException("Element could not be found!");
+            throw new NoSuchElementException("Element could not be found! " + by.ToString());
         }
 
-        
+        /// <summary>
+        /// Halts the current thread's execution for the specified time span.
+        /// </summary>
+        /// <param name="timeSpan"></param>
+        public void Wait(TimeSpan timeSpan)
+        {
+            System.Threading.Thread.Sleep(timeSpan.Milliseconds);
+        }
     }
 }
