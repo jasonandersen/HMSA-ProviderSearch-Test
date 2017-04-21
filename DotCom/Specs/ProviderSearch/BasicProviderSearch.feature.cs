@@ -19,6 +19,8 @@ namespace DotCom.Specs.ProviderSearch
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Basic Provider Search")]
+    [NUnit.Framework.CategoryAttribute("ProviderSearch")]
+    [NUnit.Framework.CategoryAttribute("HappyPath")]
     public partial class BasicProviderSearchFeature
     {
         
@@ -33,7 +35,9 @@ namespace DotCom.Specs.ProviderSearch
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Basic Provider Search", "\tAs a current or prospective HMSA member\r\n\tI want basic search results for provid" +
                     "ers\r\n\tSo that I don\'t have to browse the entire provider directory to choose a n" +
-                    "ew provider", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "ew provider", ProgrammingLanguage.CSharp, new string[] {
+                        "ProviderSearch",
+                        "HappyPath"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -67,8 +71,8 @@ namespace DotCom.Specs.ProviderSearch
         
         public virtual void FeatureBackground()
         {
-#line 7
-#line hidden
+#line 8
+ #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name",
                         "Degree",
@@ -77,9 +81,9 @@ namespace DotCom.Specs.ProviderSearch
                         "Aaron K Nada",
                         "MD",
                         "Nephrology"});
-#line 8
+#line 9
  testRunner.Given("I have this provider:", ((string)(null)), table1, "Given ");
-#line 11
+#line 12
  testRunner.And("the provider \'Aaron K Nada\' accepts \'HMSA Akamai Advantage\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -110,7 +114,7 @@ namespace DotCom.Specs.ProviderSearch
                         "HI",
                         "96766",
                         "(808) 245-8874"});
-#line 12
+#line 13
  testRunner.And("the provider \'Aaron K Nada\' has the following locations:", ((string)(null)), table2, "And ");
 #line hidden
         }
@@ -118,23 +122,27 @@ namespace DotCom.Specs.ProviderSearch
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Perform a provider search by navigating from the home page and validate first res" +
             "ult")]
+        [NUnit.Framework.CategoryAttribute("HomePage")]
+        [NUnit.Framework.CategoryAttribute("Medicare")]
         public virtual void PerformAProviderSearchByNavigatingFromTheHomePageAndValidateFirstResult()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Perform a provider search by navigating from the home page and validate first res" +
-                    "ult", ((string[])(null)));
-#line 19
-this.ScenarioSetup(scenarioInfo);
-#line 7
-this.FeatureBackground();
-#line 20
- testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 21
- testRunner.And("I select Find a Doctor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+                    "ult", new string[] {
+                        "HomePage",
+                        "Medicare"});
 #line 22
- testRunner.When("I search for \'nephrology\' with this health plan: \'HMSA Akamai Advantage\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
+#line 8
+ this.FeatureBackground();
 #line 23
- testRunner.Then("I see my search query is \'nephrology\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("I navigate to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 24
+ testRunner.And("I select Find a Doctor", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+ testRunner.When("I search for \'nephrology\' with this health plan: \'HMSA Akamai Advantage\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 26
+ testRunner.Then("I see my search query is \'nephrology\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 27
  testRunner.And("I see my plan is \'HMSA Akamai Advantage\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -148,14 +156,6 @@ this.FeatureBackground();
             table3.AddRow(new string[] {
                         "Aaron K Nada MD",
                         "Nephrology",
-                        "4643B Waimea Canyon Dr",
-                        "Waimea",
-                        "HI",
-                        "96796",
-                        "(808) 338-8311"});
-            table3.AddRow(new string[] {
-                        "Aaron K Nada MD",
-                        "Nephrology",
                         "98-1247 Kaahumanu St , Suite 315",
                         "Aiea",
                         "HI",
@@ -164,44 +164,32 @@ this.FeatureBackground();
             table3.AddRow(new string[] {
                         "Aaron K Nada MD",
                         "Nephrology",
-                        "98-211 Pali Momi St , Suite 320",
-                        "Aiea",
+                        "4643B Waimea Canyon Dr",
+                        "Waimea",
                         "HI",
-                        "96701",
-                        "(808) 523-0445"});
-            table3.AddRow(new string[] {
-                        "Aaron K Nada MD",
-                        "Nephrology",
-                        "98-1079 Moanalua Rd , Suite 250",
-                        "Aiea",
-                        "HI",
-                        "96701",
-                        "(808) 523-0445"});
-            table3.AddRow(new string[] {
-                        "Aaron K Nada MD",
-                        "Nephrology",
-                        "1520 Liliha St , Suite 601",
-                        "Honolulu",
-                        "HI",
-                        "96817",
-                        "(808) 523-0445"});
-#line 25
- testRunner.And("I see these results:", ((string)(null)), table3, "And ");
+                        "96796",
+                        "(808) 338-8311"});
+#line 28
+ testRunner.And("I see these provider search results:", ((string)(null)), table3, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Link to a map of the providers address")]
-        public virtual void LinkToAMapOfTheProvidersAddress()
+        [NUnit.Framework.DescriptionAttribute("Multiple specialties")]
+        [NUnit.Framework.CategoryAttribute("MultipleSpecialties")]
+        [NUnit.Framework.CategoryAttribute("Medicare")]
+        public virtual void MultipleSpecialties()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Link to a map of the providers address", ((string[])(null)));
-#line 34
-this.ScenarioSetup(scenarioInfo);
-#line 7
-this.FeatureBackground();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Multiple specialties", new string[] {
+                        "MultipleSpecialties",
+                        "Medicare"});
 #line 35
- testRunner.Given("I search for \'nephrology\' with this health plan: \'HMSA Akamai Advantage\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
+#line 8
+ this.FeatureBackground();
+#line 36
+ testRunner.When("I search for \'oncology\' with this health plan: \'HMSA Akamai Advantage\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Name",
@@ -212,6 +200,44 @@ this.FeatureBackground();
                         "Zip",
                         "Phone"});
             table4.AddRow(new string[] {
+                        "Jonathan K Cho MD",
+                        "Oncology/Hematology",
+                        "1329 Lusitana St , Suite 307",
+                        "Honolulu",
+                        "HI",
+                        "96813",
+                        "(808) 524-6115"});
+#line 37
+ testRunner.Then("the first result is:", ((string)(null)), table4, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Link to a map of the providers address")]
+        [NUnit.Framework.CategoryAttribute("Medicare")]
+        [NUnit.Framework.CategoryAttribute("GoogleMaps")]
+        public virtual void LinkToAMapOfTheProvidersAddress()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Link to a map of the providers address", new string[] {
+                        "Medicare",
+                        "GoogleMaps"});
+#line 43
+this.ScenarioSetup(scenarioInfo);
+#line 8
+ this.FeatureBackground();
+#line 44
+ testRunner.Given("I search for \'nephrology\' with this health plan: \'HMSA Akamai Advantage\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "Specialty",
+                        "Line 1",
+                        "City",
+                        "State",
+                        "Zip",
+                        "Phone"});
+            table5.AddRow(new string[] {
                         "Aaron K Nada MD",
                         "Nephrology",
                         "1520 Liliha St , Suite 601",
@@ -219,17 +245,17 @@ this.FeatureBackground();
                         "HI",
                         "96817",
                         "(808) 523-0445"});
-#line 36
- testRunner.And("the first result is:", ((string)(null)), table4, "And ");
-#line 39
+#line 45
+ testRunner.And("the first result is:", ((string)(null)), table5, "And ");
+#line 48
  testRunner.When("I select Map on the first result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Address"});
-            table5.AddRow(new string[] {
+            table6.AddRow(new string[] {
                         "1520 Liliha St Suite 601, Honolulu HI, 98617"});
-#line 40
- testRunner.Then("I see a Google Maps page in a separate window for this address:", ((string)(null)), table5, "Then ");
+#line 49
+ testRunner.Then("I see a Google Maps page in a separate window for this address:", ((string)(null)), table6, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

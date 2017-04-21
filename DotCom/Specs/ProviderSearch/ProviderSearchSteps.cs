@@ -81,7 +81,7 @@ namespace DotCom.Specs.ProviderSearch
         {
             // precondition: normally we would ensure we insert this data into our test environment
         }
-        
+
         [Given(@"I navigate to the home page")]
         [When(@"I navigate to the home page")]
         public void INavigateToTheHomePage()
@@ -94,9 +94,10 @@ namespace DotCom.Specs.ProviderSearch
         {
             providerSearchPage = homePage.ClickFindADoctor();
         }
-
+ 
         [Given(@"the first result is:")]
-        public void GivenTheFirstResultIs(Table table)
+        [Then(@"the first result is:")]
+        public void TheFirstResultIs(Table table)
         {
             // Grab the expected results from the table within the scenario
             IEnumerable<ProviderSearchExpectedResult> expected = table.CreateSet<ProviderSearchExpectedResult>();
@@ -108,7 +109,7 @@ namespace DotCom.Specs.ProviderSearch
             AssertMatches(expected, actual);
         }
 
-        [When(@"I search for '(.*)' with this health plan: '(.*)'")]
+        [When(@"I search for '(.*)' with this health plan: '([^']*)'")]
         [Given(@"I search for '(.*)' with this health plan: '(.*)'")]
         public void ISearchForProviderWithThisHealthPlan(string queryText, string healthPlan)
         {
@@ -120,8 +121,8 @@ namespace DotCom.Specs.ProviderSearch
             searchResultsPage = providerSearchPage.ExecuteSearch(queryText, healthPlan);
         }
 
-        [Then(@"I see these results:")]
-        public void ISeeTheseResults(Table table)
+        [Then(@"I see these provider search results:")]
+        public void ISeeTheseProviderSearchResults(Table table)
         {
             // Grab the expected results from the table within the scenario
             IEnumerable<ProviderSearchExpectedResult> expectedResults = table.CreateSet<ProviderSearchExpectedResult>();
@@ -170,21 +171,35 @@ namespace DotCom.Specs.ProviderSearch
         {
             // Iterate through the expected results and ensure that each actual result at the same index matches
             // the expected results
-            int resultIndex = 0;
             foreach (ProviderSearchExpectedResult expectedResult in expectedResults)
             {
-                ProviderSearchResult actualResult = actualResults[resultIndex];
-                Assert.AreEqual(expectedResult.Name, actualResult.ProviderName);
-                Assert.AreEqual(expectedResult.Specialty, actualResult.Specialty);
-                Assert.AreEqual(expectedResult.Line1, actualResult.Line1);
-                Assert.AreEqual(expectedResult.City, actualResult.City);
-                Assert.AreEqual(expectedResult.State, actualResult.State);
-                Assert.AreEqual(expectedResult.Zip, actualResult.Zip);
-                Assert.AreEqual(expectedResult.Phone, actualResult.Phone);
-                resultIndex++;
+                Assert.IsTrue(AssertResultsContain(actualResults, expectedResult));
             }
         }
 
-
+        /// <summary>
+        /// Asserts that an expected result has been returned within the expected results found.
+        /// </summary>
+        /// <param name="actualResults"></param>
+        /// <param name="expectedResult"></param>
+        /// <returns>true if the expected result was contained in the actual results returned</returns>
+        private bool AssertResultsContain(IList<ProviderSearchResult> actualResults, ProviderSearchExpectedResult expectedResult)
+        {
+            foreach(ProviderSearchResult actualResult in actualResults)
+            {
+                bool match = expectedResult.Name.Equals(actualResult.ProviderName);
+                match = match && expectedResult.Specialty.Equals(actualResult.Specialty);
+                match = match && expectedResult.Line1.Equals(actualResult.Line1);
+                match = match && expectedResult.City.Equals(actualResult.City);
+                match = match && expectedResult.State.Equals(actualResult.State);
+                match = match && expectedResult.Zip.Equals(actualResult.Zip);
+                match = match && expectedResult.Phone.Equals(actualResult.Phone);
+                if (match)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
